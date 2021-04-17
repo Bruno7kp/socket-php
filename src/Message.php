@@ -18,6 +18,16 @@ class Message {
     public $value;
 
     /**
+     * @var User
+     */
+    public $to;
+
+    /**
+     * @var string
+     */
+    public $date;
+
+    /**
      * @param $jsonData
      * @return Message
      */
@@ -27,6 +37,11 @@ class Message {
         $msg->type = $jsonData->type;
         $msg->user = User::create($jsonData->user);
         $msg->value = $jsonData->value;
+        $msg->date = $jsonData->date;
+        $msg->to = null;
+        if (property_exists($jsonData, 'to') && $jsonData->to) {
+            $msg->to = User::create($jsonData->to);
+        }
         return $msg;
     }
 }

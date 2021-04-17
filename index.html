@@ -2,173 +2,101 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Chat</title>
+    <title>UniChat</title>
     <link rel="stylesheet" href="assets/bootstrap.css">
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<div class="container">
-    <div class="content container-fluid bootstrap snippets bootdey">
-        <div class="row row-broken">
-            <div class="col-sm-3 col-xs-12">
-                <div class="col-inside-lg decor-default chat" style="overflow: auto; outline: none;" tabindex="5000">
-                    <div id="users" class="chat-users">
-                        <h6>Online</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-9 col-xs-12 chat" style="overflow: auto; outline: none;" tabindex="5001">
-                <div class="col-inside-lg decor-default">
-                    <div class="chat-body">
-                        <h6>Mini Chat</h6>
-                        <div class="answer left">
-                            <div class="avatar">
-                                <img src="https://avatars.dicebear.com/api/avataaars/br.svg" alt="User name">
-                                <div class="status offline"></div>
+<div id="app">
+    <div class="container">
+        <div class="content container-fluid bootstrap snippets bootdey">
+            <div class="row row-broken">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="card border-0 mb-2">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-12 col-xs-12 border-right">
+                                    <h2 class="text-center mt-2">UniChat</h2>  
+                                </div>
+                                <div class="col-md-4 col-sm-12 col-xs-12 border-right">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-12 text-center">
+                                            <img class="img-fluid rounded-circle" style="max-height: 100px;" :src="'https://avatars.dicebear.com/api/avataaars/' + user.name + '.svg'" alt="Grupo">
+                                        </div>
+                                        <div class="col-md-9 col-sm-12 text-center">
+                                            <strong class="d-block">{{ user.name || 'Olá!' }}</strong>
+                                            <small class="d-block" v-if="enterButton">Aperte em 'Entrar' para ter acesso ao chat!</small>
+                                            <small class="d-block" v-if="!enterButton">Clique nas conversas para começar o papo!</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 col-sm-12 col-xs-12">
+                                    <strong>Entre no chat!</strong>
+                                    <div class="input-group">
+                                        <input type="text" autocomplete="off" class="form-control" :disabled="!enterButton" v-model="user.name" placeholder="Digite seu nome">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-success" :disabled="!enterButton" @click="enter" type="button">Entrar</button>
+                                            <button class="btn btn-danger" :disabled="enterButton" @click="leave" type="button">Sair</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="name">Alexander Herthic</div>
-                            <div class="text">
-                                Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur
-                                adipisicing elit Lorem ipsum dolor amet, consectetur adiping elit
-                            </div>
-                            <div class="time">5 min ago</div>
-                        </div>
-                        <div class="answer right">
-                            <div class="avatar">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="User name">
-                                <div class="status offline"></div>
-                            </div>
-                            <div class="name">Alexander Herthic</div>
-                            <div class="text">
-                                Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur
-                                adipisicing elit Lorem ipsum dolor amet, consectetur adiping elit
-                            </div>
-                            <div class="time">5 min ago</div>
-                        </div>
-                        <div class="answer left">
-                            <div class="avatar">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User name">
-                                <div class="status online"></div>
-                            </div>
-                            <div class="name">Alexander Herthic</div>
-                            <div class="text">
-                                ...
-                            </div>
-                            <div class="time">5 min ago</div>
-                        </div>
-                        <div class="answer right">
-                            <div class="avatar">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="User name">
-                                <div class="status busy"></div>
-                            </div>
-                            <div class="name">Alexander Herthic</div>
-                            <div class="text">
-                                It is a long established fact that a reader will be. Thanks Mate!
-                            </div>
-                            <div class="time">5 min ago</div>
-                        </div>
-                        <div class="answer right">
-                            <div class="avatar">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User name">
-                                <div class="status off"></div>
-                            </div>
-                            <div class="name">Alexander Herthic</div>
-                            <div class="text">
-                                It is a long established fact that a reader will be. Thanks Mate!
-                            </div>
-                            <div class="time">5 min ago</div>
-                        </div>
-                        <div class="answer left">
-                            <div class="avatar">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="User name">
-                                <div class="status offline"></div>
-                            </div>
-                            <div class="name">Alexander Herthic</div>
-                            <div class="text">
-                                Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur
-                                adipisicing elit Lorem ipsum dolor amet, consectetur adiping elit
-                            </div>
-                            <div class="time">5 min ago</div>
-                        </div>
-                        <div class="answer right">
-                            <div class="avatar">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User name">
-                                <div class="status offline"></div>
-                            </div>
-                            <div class="name">Alexander Herthic</div>
-                            <div class="text">
-                                Lorem ipsum dolor amet, consectetur adipisicing elit Lorem ipsum dolor amet, consectetur
-                                adipisicing elit Lorem ipsum dolor amet, consectetur adiping elit
-                            </div>
-                            <div class="time">5 min ago</div>
-                        </div>
-                        <div class="answer left">
-                            <div class="avatar">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="User name">
-                                <div class="status online"></div>
-                            </div>
-                            <div class="name">Alexander Herthic</div>
-                            <div class="text">
-                                ...
-                            </div>
-                            <div class="time">5 min ago</div>
-                        </div>
-                        <div class="answer right">
-                            <div class="avatar">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="User name">
-                                <div class="status busy"></div>
-                            </div>
-                            <div class="name">Alexander Herthic</div>
-                            <div class="text">
-                                It is a long established fact that a reader will be. Thanks Mate!
-                            </div>
-                            <div class="time">5 min ago</div>
-                        </div>
-                        <div class="answer right">
-                            <div class="avatar">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="User name">
-                                <div class="status off"></div>
-                            </div>
-                            <div class="name">Alexander Herthic</div>
-                            <div class="text">
-                                It is a long established fact that a reader will be. Thanks Mate!
-                            </div>
-                            <div class="time">5 min ago</div>
-                        </div>
-                        <div class="answer-add">
-                            <input id="message" placeholder="Write a message">
-                            <span class="answer-btn answer-btn-1"></span>
-                            <span class="answer-btn answer-btn-2"></span>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Bem vindo ao Chat</h5>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="name" class="col-form-label">Digite seu nome</label>
-                        <input type="text" class="form-control" id="name" autocomplete="off">
+            <div class="row row-broken">
+                <div class="col-md-3 col-sm-12">
+                    <h6>Conversas</h6>
+                    <div class="col-inside-lg decor-default chat border-bottom" style="overflow: auto; outline: none;" tabindex="5000">
+                        <div class="chat-users">
+                            <div class="user" @click="setChat('group')">
+                                <div class="avatar"><img src="https://avatars.dicebear.com/api/initials/u%20c.svg" alt="Grupo"></div>
+                                <div class="name">Grupo</div>
+                                <div class="mood">Converse com todos</div>
+                            </div>
+                            <div class="user" v-for="u in usersList.filter((x) => x.uid !== user.uid)" @click="setChat(u.uid)">
+                                <div class="avatar"><img :src="'https://avatars.dicebear.com/api/avataaars/' + u.name + '.svg'" :alt="u.name"><div :class="'status '+ u.status"></div></div>
+                                <div class="name">{{ u.name }}</div>
+                                <div class="mood">Conversa privada</div>
+                            </div>
+                        </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="enter" class="btn btn-primary">Entrar</button>
+                </div>
+                <div class="col-md-9 col-sm-12 chat" style="outline: none;" tabindex="5001">
+                    <strong v-if="chat === 'group'">Grupo</strong>
+                    <strong v-if="chat !== 'group'">{{ getUserName(chat) }}</strong>
+                    <div class="col-inside-lg decor-default" style="overflow: auto; outline: none;height: calc(100% - 180px);display: flex;flex-direction: column-reverse;">
+                        <div class="chat-body">
+                            <div :class="{ answer: true, left: message.user.uid !== user.uid, right: message.user.uid === user.uid}" v-for="message in messages">
+                                <div class="avatar">
+                                    <img :src="'https://avatars.dicebear.com/api/avataaars/' + message.user.name + '.svg'" :alt="message.user.name">
+                                    <div :class="'status '+ message.user.status"></div>
+                                </div>
+                                <div class="name">{{ message.user.name }}</div>
+                                <div class="text" v-html="message.value"></div>
+                                <div class="time"><timeago :since="message.date" :auto-update="60" locale="pt-BR"></timeago></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-inside-lg decor-default">
+                        <div class="chat-body">
+                            <div class="answer-add" style="margin: 0px -20px -20px;">
+                                <input v-model="message" :disabled="enterButton" placeholder="Escreva a mensagem" class="border-bottom" style="height:40px">
+                                <button @click="sendMessage" class="btn btn-primary mt-2" :disabled="enterButton">Enviar mensagem</button>
+                                <button @click="sendMessage" class="btn btn-secondary mt-2" :disabled="enterButton">Enviar arquivo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <script src="assets/jquery.js"></script>
 <script src="assets/bootstrap.js"></script>
+<script src="assets/vue.js"></script>
+<script src="assets/vue-timeago.js"></script>
 <script src="assets/script.js"></script>
 </body>
 </html>
