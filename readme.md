@@ -1,4 +1,4 @@
-Primeiro instale as dependências:
+### Instalação
 
 ```bash
 $ composer install
@@ -16,8 +16,10 @@ Inicie o cliente:
 $ php client.php
 ```
 
+### Instruções
 
-Acesse no navegador **localhost:8081** para acessar o cliente, e **localhost:8081/server** para acessar a visão geral do servidor
+Acesse no navegador **localhost:8081** para acessar o cliente, e **localhost:8081/server** para acessar a visão geral do servidor.
+Pode abrir o cliente em várias abas, cada aba será um usuário diferente.
 
 **Nota:** ao fazer o download de um arquivo, a janela perguntando o local de download pode não ser abertar pois depende das configurações do seu navegador.
 
@@ -30,4 +32,6 @@ Acesse no navegador **localhost:8081** para acessar o cliente, e **localhost:808
 - [Bootstrap](https://getbootstrap.com/) versão 4.6: Framework HTML/CSS
 - [Vue.js](https://vuejs.org) versão 2.6.12: Framework JavaScript
 - [Vue Timeago](https://github.com/runkids/vue2-timeago) versão 2.6.12: Extensão para Vue.js para mostrar o tempo de envio das mensagens
+- [DiceBear Avatars](https://avatars.dicebear.com): Gerador de avatares pelo nome do usuário
+- [Snippet Facebook Messenger](https://www.bootdey.com/snippets/view/facebook-messenger-chat): Estilo do bootstrap utilizado para o chat
 
