@@ -1,7 +1,8 @@
 <?php
 namespace SocketChat;
 
-class Message {
+class Message 
+{
     /**
      * @var string
      */

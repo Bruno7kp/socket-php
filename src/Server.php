@@ -55,12 +55,14 @@ final class Server implements MessageComponentInterface
         switch ($data->type) {
             case 'enter':
                 // Mensagem de entrada no chat
+                $data->user->ip = $from->remoteAddress;
                 $this->mappedConn[$from->resourceId] = $data->user->uid;
                 $this->userInfo[$data->user->uid] = $data->user;
                 $this->sendEnteringUser($from);
                 $this->sendUsersList();
                 break;
             case 'message':
+            case 'file':
                 if ($data->to instanceof User) {
                     $from->send($msg);
                     $to = $this->getConnFromUser($data->to);
@@ -72,7 +74,6 @@ final class Server implements MessageComponentInterface
                         $client->send($msg);
                     }
                 }
-                
                 break;
         }
     }

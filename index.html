@@ -53,12 +53,12 @@
                             <div class="user" @click="setChat('group')">
                                 <div class="avatar"><img src="https://avatars.dicebear.com/api/initials/u%20c.svg" alt="Grupo"></div>
                                 <div class="name">Grupo</div>
-                                <div class="mood">Converse com todos</div>
+                                <div class="mood">{{ lastMessage('group') }}</div>
                             </div>
                             <div class="user" v-for="u in usersList.filter((x) => x.uid !== user.uid)" @click="setChat(u.uid)">
                                 <div class="avatar"><img :src="'https://avatars.dicebear.com/api/avataaars/' + u.name + '.svg'" :alt="u.name"><div :class="'status '+ u.status"></div></div>
                                 <div class="name">{{ u.name }}</div>
-                                <div class="mood">Conversa privada</div>
+                                <div class="mood">{{ lastMessage(u.uid) }}</div>
                             </div>
                         </div>
                     </div>
@@ -74,7 +74,8 @@
                                     <div :class="'status '+ message.user.status"></div>
                                 </div>
                                 <div class="name">{{ message.user.name }}</div>
-                                <div class="text" v-html="message.value"></div>
+                                <div class="text" v-if="message.type === 'message'" v-html="message.value"></div>
+                                <div class="text" v-if="message.type === 'file'"><a :href="message.value.file" :download="message.value.name" :class="{btn: true, 'btn-outline-dark': message.user.uid !== user.uid, 'btn-outline-light': message.user.uid === user.uid }">Baixar arquivo: {{ message.value.name }}</a></div>
                                 <div class="time"><timeago :since="message.date" :auto-update="60" locale="pt-BR"></timeago></div>
                             </div>
                         </div>
@@ -84,7 +85,8 @@
                             <div class="answer-add" style="margin: 0px -20px -20px;">
                                 <input v-model="message" :disabled="enterButton" placeholder="Escreva a mensagem" class="border-bottom" style="height:40px">
                                 <button @click="sendMessage" class="btn btn-primary mt-2" :disabled="enterButton">Enviar mensagem</button>
-                                <button @click="sendMessage" class="btn btn-secondary mt-2" :disabled="enterButton">Enviar arquivo</button>
+                                <button @click="triggerFile" class="btn btn-secondary mt-2" :disabled="enterButton">Enviar arquivo</button>
+                                <input type="file" id="file" @change="sendFile" class="d-none">
                             </div>
                         </div>
                     </div>
