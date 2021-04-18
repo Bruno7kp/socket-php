@@ -4,7 +4,7 @@ new Vue({
         const user = {
             name: '',
             status: 'online',
-            uid: '_' + Math.random().toString(36).substr(2, 9),
+            uid: isServer ? 'server' : '_' + Math.random().toString(36).substr(2, 9),
             ip: '',
         };
 
@@ -19,6 +19,13 @@ new Vue({
             chat: 'group',
             messages: [],
             message: '',
+            log: '',
+        }
+    },
+    mounted() {
+        if (isServer) {
+            this.user.name = 'server';
+            this.enter();
         }
     },
     methods: {
@@ -128,9 +135,6 @@ new Vue({
             }
             return 'Inicie a conversa!';
         },
-        download(file) {
-
-        },
         sort(list) {
             return list.sort((a, b) => {
                 if (typeof this.chats[a.uid] !== 'undefined' && this.chats[a.uid].length > 0) {
@@ -210,6 +214,9 @@ new Vue({
                             this.messages = this.chats[chatid];
                         }
                         this.usersList = this.sort(this.usersList);
+                        break;
+                    case 'log':
+                        this.log = data.value;
                         break;
                 }
             });

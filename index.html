@@ -76,7 +76,7 @@
                                 <div class="name">{{ message.user.name }}</div>
                                 <div class="text" v-if="message.type === 'message'" v-html="message.value"></div>
                                 <div class="text" v-if="message.type === 'file'"><a :href="message.value.file" :download="message.value.name" :class="{btn: true, 'btn-outline-dark': message.user.uid !== user.uid, 'btn-outline-light': message.user.uid === user.uid }">Baixar arquivo: {{ message.value.name }}</a></div>
-                                <div class="time"><timeago :since="message.date" :auto-update="60" locale="pt-BR"></timeago></div>
+                                <div class="time"><timeago :since="message.date" :auto-update="5" locale="pt-BR"></timeago></div>
                             </div>
                         </div>
                     </div>
@@ -95,6 +95,7 @@
         </div>
     </div>
 </div>
+<script>const isServer = false;</script>
 <script src="assets/jquery.js"></script>
 <script src="assets/bootstrap.js"></script>
 <script src="assets/vue.js"></script>

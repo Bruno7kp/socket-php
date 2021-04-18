@@ -17,6 +17,7 @@ final class Server implements MessageComponentInterface
     private $mappedConn = [];
     private $userInfo = [];
     private $logger;
+    private $server;
 
     public function __construct()
     {
@@ -32,11 +33,22 @@ final class Server implements MessageComponentInterface
 
     public function log($senderIp, $senderName, $receiverIp, $receiverName, $action): void
     {
-        // Exemplo:  06/04/2021; 12:54; 192.168.10.50; luciano; 200.10.10.10; servidor; login
+        // Exemplo: 06/04/2021; 12:54; 192.168.10.50; luciano; 200.10.10.10; servidor; login
         $now = new DateTime();
         $date = $now->format('d/m/Y');
         $hour = $now->format('H:i');
         $this->logger->info("$date; $hour; $senderIp; $senderName; $receiverIp; $receiverName; $action");
+        $this->sendLogs();
+    }
+
+    public function sendLogs(): void
+    {
+        if ($this->server instanceof ConnectionInterface) {
+            $data = new Message();
+            $data->type = 'log';
+            $data->value = file_get_contents(__DIR__.'/../chat_log.log');
+            $this->server->send(json_encode($data));
+        }
     }
 
     public function onOpen(ConnectionInterface $conn): void
@@ -56,8 +68,11 @@ final class Server implements MessageComponentInterface
 
     public function getUserFromConn(ConnectionInterface $conn)
     {
-        $uid = $this->mappedConn[$conn->resourceId];
-        return $this->userInfo[$uid];
+        if (array_key_exists($conn->resourceId, $this->mappedConn)) {
+            $uid = $this->mappedConn[$conn->resourceId];
+            return $this->userInfo[$uid];
+        }
+        return null;
     }
 
     public function getConnFromUser(User $user)
@@ -77,12 +92,17 @@ final class Server implements MessageComponentInterface
             case 'enter':
                 // Mensagem de entrada no chat
                 $data->user->ip = $from->remoteAddress;
-                $this->mappedConn[$from->resourceId] = $data->user->uid;
-                $this->userInfo[$data->user->uid] = $data->user;
-                $hostAddr = gethostname();
-                $ipAddr = gethostbyname($hostAddr);
-                $this->log($from->remoteAddress, $data->user->name, $ipAddr, 'server', 'login');
-                $this->sendEnteringUser($from);
+                if ($data->user->uid !== 'server') {
+                    $this->mappedConn[$from->resourceId] = $data->user->uid;
+                    $this->userInfo[$data->user->uid] = $data->user;
+                    $hostAddr = gethostname();
+                    $ipAddr = gethostbyname($hostAddr);
+                    $this->log($from->remoteAddress, $data->user->name, $ipAddr, 'server', 'login');
+                    $this->sendEnteringUser($from);
+                } else {
+                    $this->server = $from;
+                    $this->sendLogs();
+                }
                 $this->sendUsersList();
                 break;
             case 'message':
@@ -104,7 +124,7 @@ final class Server implements MessageComponentInterface
                     foreach ($this->clients as $client) {
                         $client->send($msg);
                         $u = $this->getUserFromConn($client);
-                        if ($u->uid !== $data->user->uid) {
+                        if ($u !== null && $u->uid !== $data->user->uid) {
                             $ips[] = $u->ip;
                             $names[] = $u->name;
                         }
@@ -122,14 +142,17 @@ final class Server implements MessageComponentInterface
     public function onClose(ConnectionInterface $conn): void
     {
         $u = $this->getUserFromConn($conn);
-        $u->status = 'offline';
-        $this->userInfo[$u->uid] = $u;
-        $hostAddr = gethostname();
-        $ipAddr = gethostbyname($hostAddr);
-        $this->log($conn->remoteAddress, $u->name, $ipAddr, 'server', 'logoff');
-        $this->sendLeavingUser($conn);
-        unset($this->mappedConn[$conn->resourceId]);
-        // unset($this->userInfo[$conn->resourceId]); perde conexão mas continua na lista como 'offline'
+        if ($u !== null) {
+            $u->status = 'offline';
+            $this->userInfo[$u->uid] = $u;
+            $hostAddr = gethostname();
+            $ipAddr = gethostbyname($hostAddr);
+            $this->log($conn->remoteAddress, $u->name, $ipAddr, 'server', 'logoff');
+            $this->sendLeavingUser($conn);
+            unset($this->mappedConn[$conn->resourceId]);
+            // unset($this->userInfo[$conn->resourceId]); perde conexão mas continua na lista como 'offline'
+        }
+        
         $this->clients->detach($conn);
         $this->sendUsersList();
     }

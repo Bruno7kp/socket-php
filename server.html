@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>UniChat</title>
+    <link rel="stylesheet" href="assets/bootstrap.css">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="app">
+    <div class="container">
+        <div class="content container-fluid bootstrap snippets bootdey">
+            <div class="row row-broken">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="card border-0 mb-2">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12 col-xs-12 border-right">
+                                    <h2 class="text-center mt-2">UniChat Server</h2>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-broken">
+                <div class="col-md-3 col-sm-12">
+                    <h6>Usuários</h6>
+                    <div class="col-inside-lg decor-default chat border-bottom" style="overflow: auto; outline: none;" tabindex="5000">
+                        <div class="chat-users">
+                            <div class="user" v-for="u in usersList">
+                                <div class="avatar"><img :src="'https://avatars.dicebear.com/api/avataaars/' + u.name + '.svg'" :alt="u.name"><div :class="'status '+ u.status"></div></div>
+                                <div class="name">{{ u.name }}</div>
+                                <div class="mood">{{ u.ip }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-12 chat" style="outline: none;" tabindex="5001">
+                    <strong>Log</strong>
+                    <div class="col-inside-lg decor-default" style="overflow: auto; outline: none;height: 100%;display: flex;flex-direction: column-reverse;">
+                        <div class="chat-body">
+                            <pre v-html="log"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>const isServer = true;</script>
+<script src="assets/jquery.js"></script>
+<script src="assets/bootstrap.js"></script>
+<script src="assets/vue.js"></script>
+<script src="assets/vue-timeago.js"></script>
+<script src="assets/script.js"></script>
+</body>
+</html>
