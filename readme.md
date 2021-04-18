@@ -25,7 +25,7 @@ Pode abrir o cliente em várias abas, cada aba será um usuário diferente.
 
 ### Requisitos e bibliotecas utilizadas
 - [PHP](https://www.php.net) versão > 7.1
-- [Composer](https://getcomposer.org): Gerenciado de bibliotecas do PHP
+- [Composer](https://getcomposer.org): Gerenciador de bibliotecas do PHP
 - [Ratchet](https://github.com/ratchetphp/Ratchet): Biblioteca em PHP para fazer o servidor de WebSockets
 - [ReactPHP](https://reactphp.org): Biblioteca em PHP para rodar o cliente (também utilizado como dependência do Ratchet)
 - [MonoLog](https://github.com/Seldaek/monolog): Biblioteca em PHP para salvar logs
