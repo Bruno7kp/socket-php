@@ -1,4 +1,8 @@
 <?php
+/**
+ * Este arquivo roda o servidor utilizando a biblioteca Ratchet (http://socketo.me)
+ */
+
 date_default_timezone_set('America/Sao_Paulo');
 
 require './vendor/autoload.php';

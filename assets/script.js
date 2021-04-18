@@ -60,6 +60,8 @@ new Vue({
                 to: to,
                 date: Date.now(),
             };
+            this.chats[this.chat].push(messageData);
+            this.messages = this.chats[this.chat];
             // Serializamos o objeto para json
             this.socket.send(JSON.stringify(messageData));
             this.message = '';
@@ -93,6 +95,8 @@ new Vue({
                         date: Date.now(),
                     };
                     console.log(messageData);
+                    this.chats[this.chat].push(messageData);
+                    this.messages = this.chats[this.chat];
                     // Serializamos o objeto para json
                     that.socket.send(JSON.stringify(messageData));
                 };
@@ -136,6 +140,7 @@ new Vue({
             return 'Inicie a conversa!';
         },
         sort(list) {
+            // Ordena usuários por última mensagem recebida, status e nome
             return list.sort((a, b) => {
                 if (typeof this.chats[a.uid] !== 'undefined' && this.chats[a.uid].length > 0) {
                     if (typeof this.chats[b.uid] !== 'undefined' && this.chats[b.uid].length > 0) {
@@ -181,6 +186,7 @@ new Vue({
                 console.log(data);
                 switch (data.type) {
                     case 'users':
+                        // Atualiza lista de usuário
                         this.usersList = this.sort(data.value);
                         for (let i = 0; i < this.usersList.length; i++) {
                             if (typeof this.chats[this.usersList[i].uid] === 'undefined') {

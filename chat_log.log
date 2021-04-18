@@ -16,3 +16,15 @@
 18/04/2021; 10:11; 127.0.0.1; rfgty; 192.168.56.1; server; login
 18/04/2021; 10:11; 127.0.0.1; rfgty; 127.0.0.1-127.0.0.1; asdasd-rtdfg; msg:sfsdf
 18/04/2021; 10:11; 127.0.0.1; asdasd; 127.0.0.1-127.0.0.1; rtdfg-rfgty; msg:dsfsdf
+18/04/2021; 10:38; 127.0.0.1; asdasd; 192.168.56.1; server; login
+18/04/2021; 10:38; 127.0.0.1; asdasd; ; ; msg:asd
+18/04/2021; 10:38; 127.0.0.1; asdasd; ; ; msg:qweqwe
+18/04/2021; 10:38; 127.0.0.1; erwererfd; 192.168.56.1; server; login
+18/04/2021; 10:38; 127.0.0.1; erwererfd; 127.0.0.1; asdasd; msg:werwerdfsdf
+18/04/2021; 10:38; 127.0.0.1; erwererfd; 127.0.0.1; asdasd; msg:wer wrwe erwer
+18/04/2021; 10:38; 127.0.0.1; asdasd; 127.0.0.1; erwererfd; msg:sdsdasdad
+18/04/2021; 10:39; 127.0.0.1; asdasd; 127.0.0.1; erwererfd; msg:asdsdasdasd
+18/04/2021; 10:39; 127.0.0.1; asdasd; 127.0.0.1; erwererfd; msg:qweqwe
+18/04/2021; 10:39; 127.0.0.1; erwererfd; 127.0.0.1; asdasd; msg:qweqeqw
+18/04/2021; 10:39; 127.0.0.1; asdasd; 127.0.0.1; erwererfd; msg:qweqe
+18/04/2021; 10:39; 127.0.0.1; erwererfd; 127.0.0.1; asdasd; msg:qweqwe

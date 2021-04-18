@@ -1,4 +1,8 @@
 <?php
+/**
+ * Este arquivo serve os arquivo de html, js e css para rodar o cliente e a visão do servidor (com os logs e usuários)
+ * Utiliza a biblioteca React para rodar (https://reactphp.org), a biblioteca Ratchet também utiliza a React como dependência
+ */
 date_default_timezone_set('America/Sao_Paulo');
 
 require './vendor/autoload.php';
@@ -13,7 +17,9 @@ function endsWith($string, $endString)
     }
     return (substr($string, -$len) === $endString);
 }
-
+/**
+ * Versão simplificada de um servidor web, sem usar apache, nginx, etc...
+ */
 $server = new React\Http\Server($loop, function (Psr\Http\Message\ServerRequestInterface $request) {
     $path = $request->getUri()->getPath();
     $type = 'text/html';
@@ -41,6 +47,5 @@ $server = new React\Http\Server($loop, function (Psr\Http\Message\ServerRequestI
 
 $socket = new React\Socket\Server(8081, $loop);
 $server->listen($socket);
-
 
 $loop->run();
