@@ -1,0 +1,9 @@
+18/04/2021; 04:42; 127.0.0.1; ASDASD; 192.168.56.1; server; login
+18/04/2021; 04:43; 127.0.0.1; DASDASasasd; 192.168.56.1; server; login
+18/04/2021; 04:43; 127.0.0.1; DASDASasasd; 127.0.0.1; ASDASD; msg:asdasd
+18/04/2021; 04:43; 127.0.0.1; DASDASasasd; 127.0.0.1; ASDASD; msg:asd sdasdasd
+18/04/2021; 04:43; 127.0.0.1; DASDASasasd; 127.0.0.1; ASDASD; msg:asdasd
+18/04/2021; 04:44; 127.0.0.1; DASDASasasd; 127.0.0.1; ASDASD; msg:asdsasdasd
+18/04/2021; 04:44; 127.0.0.1; asd; 192.168.56.1; server; login
+18/04/2021; 04:44; 127.0.0.1; asd; 127.0.0.1-127.0.0.1; ASDASD-DASDASasasd; msg:sasdasd
+18/04/2021; 04:45; 127.0.0.1; asd; 127.0.0.1-127.0.0.1; ASDASD-DASDASasasd; arq:seguranca.pdf
